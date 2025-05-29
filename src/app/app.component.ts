@@ -1,13 +1,12 @@
 import {Component} from '@angular/core';
 import {HeaderComponent} from './app-components/header/header.component';
+import {ProductsListComponent} from './pages/products-list/products-list.component';
 
 @Component({
     selector: 'app-root',
-    // selector: 'div#root',
     standalone: true,
-    imports: [HeaderComponent],
+    imports: [HeaderComponent, ProductsListComponent],
     templateUrl: './app.component.html',
-    // template: '<h1>Its works</h1>',
     styleUrl: './app.component.css',
 })
 export class AppComponent {
