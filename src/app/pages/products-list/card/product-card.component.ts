@@ -14,9 +14,5 @@ import {productsMock} from '../../../shared/products/products.mock';
     styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent {
-    product: Product;
-
-    constructor() {
-        this.product = productsMock[0];
-    }
+    readonly product: Product = productsMock[0];
 }
