@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -13,7 +13,21 @@ import {productsMock} from '../../../shared/products/products.mock';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-    readonly product = productsMock[0];
+    private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
+    product = productsMock[0];
+
+    constructor() {
+        let count = 0;
+
+        setInterval(() => {
+            count += 1;
+
+            this.product = productsMock[count];
+
+            this.changeDetectorRef.markForCheck();
+        }, 1000);
+    }
 
     onProductBuy(event: Event) {
         event.stopPropagation();

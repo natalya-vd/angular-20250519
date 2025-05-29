@@ -25,5 +25,15 @@
     </mat-card-content>
     <mat-card-actions class="mat-card-actions-align-end">
         <button mat-button [disabled]="!product" (click)="onProductBuy($event)">Buy</button>
+        <!--
+            (click)="onProductBuy($event)"
+
+                |
+                V
+
+            buttonElement.addEventListener('click', ($event) => {
+                onProductBuy($event)
+            });
+        -->
     </mat-card-actions>
 </mat-card>
