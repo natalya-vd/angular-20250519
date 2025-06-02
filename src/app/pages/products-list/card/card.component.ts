@@ -1,11 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    computed,
-    inject,
-    signal,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, signal} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -20,67 +13,83 @@ import {productsMock} from '../../../shared/products/products.mock';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-    private readonly changeDetectorRef = inject(ChangeDetectorRef);
+    readonly count = signal(0);
 
-    // product = productsMock[0];
-    readonly count = signal(0, {
-        equal: (a, b) => a === b,
-    });
+    readonly product = computed(() => productsMock[this.count()]);
 
-    // readonly product = signal(productsMock[0]);
-    readonly product = computed(() => {
-        // eslint-disable-next-line no-console
-        console.log('Computed calculated');
-
-        return productsMock[this.count()];
-    });
-
+    // eslint-disable-next-line max-statements
     constructor() {
-        // let count = 0;
-
         setInterval(() => {
-            // count += 1;
-
-            // this.product.set(productsMock[count]);
-
-            // this.changeDetectorRef.markForCheck();
-
             this.count.update(count => count + 1);
         }, 1000);
 
-        // const count = signal(0, {
-        //     equal: (a, b) => a === b,
-        // });
+        const showCount = signal(false);
+        const count = signal(0);
+        const conditionalCount = computed(() => {
+            console.warn('Computed calculated');
 
-        // console.log(count());
+            return showCount() ? `The count: ${count()}` : `Nothing`;
+        });
 
-        // count.set(10);
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
 
-        // console.log(count());
+        // eslint-disable-next-line no-console
+        console.log('Update count');
+        count.update(count => count + 1);
 
-        // // count.update(curentCount => curentCount + 1);
-        // count.update(curentCount => {
-        //     return curentCount + 1;
-        // });
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
 
-        // console.log(count());
+        // eslint-disable-next-line no-console
+        console.log('Update count');
+        count.update(count => count + 1);
 
-        // -------------------------------------------------------
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
 
-        // console.log('Start test');
+        // eslint-disable-next-line no-console
+        console.log('Update count');
+        count.update(count => count + 1);
 
-        // console.log(this.product());
-        // console.log(this.product());
-        // console.log(this.product());
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
 
-        // console.log('Update count');
-        // this.count.update(count => count + 1);
+        // eslint-disable-next-line no-console
+        console.log('Show count: true');
+        showCount.set(true);
 
-        // console.log(this.product());
-        // console.log(this.product());
-        // console.log(this.product());
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
 
-        // -------------------------------------------------------
+        // eslint-disable-next-line no-console
+        console.log('Update count');
+        count.update(count => count + 1);
+
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
+
+        // eslint-disable-next-line no-console
+        console.log('Update count');
+        count.update(count => count + 1);
+
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
+
+        // eslint-disable-next-line no-console
+        console.log('Update count');
+        count.update(count => count + 1);
+
+        // eslint-disable-next-line no-console
+        console.log(conditionalCount());
     }
 
     onProductBuy(event: Event) {
